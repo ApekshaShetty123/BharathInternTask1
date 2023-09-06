@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2015 at 09:34 AM
--- Server version: 5.5.36
--- PHP Version: 5.4.27
+-- Generation Time: Sep 06, 2023 at 07:49 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `pmas`
@@ -26,11 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
+CREATE TABLE `admin` (
   `ID` char(5) NOT NULL,
-  `password` char(5) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `password` char(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -45,7 +45,7 @@ INSERT INTO `admin` (`ID`, `password`) VALUES
 -- Table structure for table `faculty`
 --
 
-CREATE TABLE IF NOT EXISTS `faculty` (
+CREATE TABLE `faculty` (
   `f_id` varchar(10) NOT NULL,
   `name` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
@@ -54,15 +54,16 @@ CREATE TABLE IF NOT EXISTS `faculty` (
   `qualification` varchar(200) NOT NULL,
   `domain` varchar(200) NOT NULL,
   `research` varchar(200) NOT NULL,
-  `others` varchar(500) NOT NULL,
-  PRIMARY KEY (`f_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `others` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `faculty`
 --
 
 INSERT INTO `faculty` (`f_id`, `name`, `email`, `phone`, `password`, `qualification`, `domain`, `research`, `others`) VALUES
+('105', 'Jaya', 'jay29@gmail.com', '8861561952', 'jaya123', 'Teacher', 'NULL', 'NULL', 'NULL'),
+('admin', '', '', '', 'admin', '', 'NULL', 'NULL', 'NULL'),
 ('f112', 'Jaswant Kumar a', 'jas@gmail.coma', '123', '12312', 'M.Techa', 'java', 'php', 'asp'),
 ('f908', 'jas', 'jas@gmail.com', '1234567', '123', '', 'NUL', 'NUL', 'NUL'),
 ('f987', 'jas', 'jas@gmail.comhahah', '1234567', '147', 'sbkjh', 'NULL', 'NULL', 'NULL');
@@ -73,15 +74,12 @@ INSERT INTO `faculty` (`f_id`, `name`, `email`, `phone`, `password`, `qualificat
 -- Table structure for table `mail`
 --
 
-CREATE TABLE IF NOT EXISTS `mail` (
-  `mail_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mail` (
+  `mail_id` int(5) NOT NULL,
   `s_id` varchar(10) NOT NULL,
   `f_id` varchar(10) NOT NULL,
-  `msg` varchar(250) NOT NULL,
-  PRIMARY KEY (`mail_id`),
-  KEY `s_id` (`s_id`,`f_id`),
-  KEY `f_id` (`f_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+  `msg` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `mail`
@@ -106,17 +104,14 @@ INSERT INTO `mail` (`mail_id`, `s_id`, `f_id`, `msg`) VALUES
 -- Table structure for table `meeting`
 --
 
-CREATE TABLE IF NOT EXISTS `meeting` (
-  `meeting_id` int(5) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `meeting` (
+  `meeting_id` int(5) NOT NULL,
   `f_id` varchar(10) NOT NULL,
   `s_id` varchar(10) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `desc` varchar(200) NOT NULL,
-  PRIMARY KEY (`meeting_id`),
-  KEY `f_id` (`f_id`,`s_id`),
-  KEY `s_id` (`s_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `desc` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `meeting`
@@ -133,7 +128,7 @@ INSERT INTO `meeting` (`meeting_id`, `f_id`, `s_id`, `date`, `time`, `desc`) VAL
 -- Table structure for table `project`
 --
 
-CREATE TABLE IF NOT EXISTS `project` (
+CREATE TABLE `project` (
   `p_id` varchar(10) NOT NULL,
   `name` varchar(30) DEFAULT NULL,
   `domain` varchar(20) DEFAULT NULL,
@@ -141,17 +136,16 @@ CREATE TABLE IF NOT EXISTS `project` (
   `f_id` varchar(10) DEFAULT NULL,
   `ppf` varchar(200) NOT NULL,
   `psf` varchar(200) NOT NULL,
-  `remark` varchar(500) NOT NULL,
-  PRIMARY KEY (`p_id`),
-  KEY `f_id` (`f_id`),
-  KEY `s_id` (`s_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `remark` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `project`
 --
 
 INSERT INTO `project` (`p_id`, `name`, `domain`, `s_id`, `f_id`, `ppf`, `psf`, `remark`) VALUES
+('10', '', '', 'we34', 'f112', '', '', ''),
+('122', '', '', 'we34', 'f112', '', '', ''),
 ('1234', '', '', 'we34', 'f112', '', '', 'Excellent report!'),
 ('dd', NULL, NULL, 's115', 'f112', 'gantt chart f.pdf', '', 'hello'),
 ('gdg', '', '', 's112', 'f987', '', '', ''),
@@ -163,14 +157,11 @@ INSERT INTO `project` (`p_id`, `name`, `domain`, `s_id`, `f_id`, `ppf`, `psf`, `
 -- Table structure for table `request`
 --
 
-CREATE TABLE IF NOT EXISTS `request` (
-  `request_id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `request` (
+  `request_id` int(10) NOT NULL,
   `s_id` varchar(10) NOT NULL,
-  `f_id` varchar(10) NOT NULL,
-  PRIMARY KEY (`request_id`),
-  KEY `s_id` (`s_id`),
-  KEY `f_id` (`f_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=795 ;
+  `f_id` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `request`
@@ -192,16 +183,15 @@ INSERT INTO `request` (`request_id`, `s_id`, `f_id`) VALUES
 -- Table structure for table `student`
 --
 
-CREATE TABLE IF NOT EXISTS `student` (
+CREATE TABLE `student` (
   `s_id` varchar(10) NOT NULL,
   `name` varchar(25) NOT NULL,
   `email` varchar(30) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `password` varchar(25) NOT NULL,
   `year` varchar(10) NOT NULL,
-  `stream` varchar(15) NOT NULL,
-  PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `stream` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `student`
@@ -209,9 +199,13 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 INSERT INTO `student` (`s_id`, `name`, `email`, `phone`, `password`, `year`, `stream`) VALUES
 ('', '', '', 'admin', 'admin', '', 'Selcet'),
+('1', 'Apeksha shetty', 'apeksha12@gmail.com', '7483716046', 'Ape123', '2020', 'CSE'),
+('100', 'Apeksha', 'apeksha123@gmail.com', '9449305096', 'Apeksha@29', '2003', 'CSE'),
 ('1213', 'ksk', 'sdlj@gmail.com', 'admin', 'admin', '2001', 'CSE'),
 ('12345', 'Pritesh', 'p4@yahoo.com', '2324345', 'bunny', '2016', 'CSE'),
 ('141', 'saaya', 'sweetsaaya@gmail.com', 'admin', 'admin', '1990', 'COM'),
+('2', 'Apeksha p', 'apeksha1234@gmail.com', '7483716048', 'A123', '2021', 'EE'),
+('appushetty', 'Aapeksha pun', 'appu@appu.in', '1234567890', '1234', '2000', 'CSE'),
 ('s111', 'Jaswant Kumar', 'jas@gmail.com', '1234567890', '12345', '15-16', 'COM'),
 ('s112', 'Jaswant Kumar', 'jaswant@gmail.com', '123456789', '123', '15-16', 'CSE'),
 ('s113', 'Jaswant Kumar', 'jaswant@gamial.com', '5468522', '', '123', 'EE'),
@@ -225,15 +219,12 @@ INSERT INTO `student` (`s_id`, `name`, `email`, `phone`, `password`, `year`, `st
 -- Table structure for table `st_mail`
 --
 
-CREATE TABLE IF NOT EXISTS `st_mail` (
-  `s_mail_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `st_mail` (
+  `s_mail_id` int(11) NOT NULL,
   `s_id` varchar(10) NOT NULL,
   `f_id` varchar(10) NOT NULL,
-  `mag` varchar(250) NOT NULL,
-  PRIMARY KEY (`s_mail_id`),
-  KEY `s_id` (`s_id`,`f_id`),
-  KEY `f_id` (`f_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `mag` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `st_mail`
@@ -244,6 +235,96 @@ INSERT INTO `st_mail` (`s_mail_id`, `s_id`, `f_id`, `mag`) VALUES
 (2, 's113', 'f112', '142'),
 (3, 's113', 'f112', 'hello dear'),
 (4, 's113', 'f112', 'hello');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `faculty`
+--
+ALTER TABLE `faculty`
+  ADD PRIMARY KEY (`f_id`);
+
+--
+-- Indexes for table `mail`
+--
+ALTER TABLE `mail`
+  ADD PRIMARY KEY (`mail_id`),
+  ADD KEY `s_id` (`s_id`,`f_id`),
+  ADD KEY `f_id` (`f_id`);
+
+--
+-- Indexes for table `meeting`
+--
+ALTER TABLE `meeting`
+  ADD PRIMARY KEY (`meeting_id`),
+  ADD KEY `f_id` (`f_id`,`s_id`),
+  ADD KEY `s_id` (`s_id`);
+
+--
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`p_id`),
+  ADD KEY `f_id` (`f_id`),
+  ADD KEY `s_id` (`s_id`);
+
+--
+-- Indexes for table `request`
+--
+ALTER TABLE `request`
+  ADD PRIMARY KEY (`request_id`),
+  ADD KEY `s_id` (`s_id`),
+  ADD KEY `f_id` (`f_id`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`s_id`);
+
+--
+-- Indexes for table `st_mail`
+--
+ALTER TABLE `st_mail`
+  ADD PRIMARY KEY (`s_mail_id`),
+  ADD KEY `s_id` (`s_id`,`f_id`),
+  ADD KEY `f_id` (`f_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `mail`
+--
+ALTER TABLE `mail`
+  MODIFY `mail_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `meeting`
+--
+ALTER TABLE `meeting`
+  MODIFY `meeting_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `request`
+--
+ALTER TABLE `request`
+  MODIFY `request_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=795;
+
+--
+-- AUTO_INCREMENT for table `st_mail`
+--
+ALTER TABLE `st_mail`
+  MODIFY `s_mail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -283,6 +364,7 @@ ALTER TABLE `request`
 ALTER TABLE `st_mail`
   ADD CONSTRAINT `m1` FOREIGN KEY (`s_id`) REFERENCES `student` (`s_id`),
   ADD CONSTRAINT `m2` FOREIGN KEY (`f_id`) REFERENCES `faculty` (`f_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
